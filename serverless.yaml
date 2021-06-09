@@ -1,0 +1,14 @@
+service: echo-text
+provider:
+  name: aws # provider
+  region: ${env:AWS_REGION} # aws region
+  memorySize: 1024 # optional, in MB, default is 1024
+  timeout: 30 # optional, in seconds, default is 6
+
+functions:
+  echo:
+    image: ${env:AWS_ACCOUNT_ID}.dkr.ecr.${env:AWS_REGION}.amazonaws.com/ping:latest
+    events:
+      - http:
+          path: ping # http path
+          method: post # http method
